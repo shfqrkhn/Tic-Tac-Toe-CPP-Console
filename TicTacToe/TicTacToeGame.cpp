@@ -19,6 +19,7 @@ void TicTacToeGame::clearBoard()
 
 void TicTacToeGame::printBoard()
 {
+	//system("cls");
 	cout << endl;
 	cout << " |1|2|3|\n";
 	for (int y = 0; y < 3; y++) {
@@ -40,29 +41,83 @@ void TicTacToeGame::playGame()
 
 	int x, y;
 
+	int turn = 0;
+
 	while (isDone == false) {
+		
 		printBoard();
+		
 		x = getXCoord();
 		y = getYCoord();
-		placeMarker(x, y, currentPlayer);
+		
+		if (placeMarker(x, y, currentPlayer) == false) {
+			cout << "That spot is occupied\n";
+		}
+		else {
+			turn++;
+			if (checkForVictory() == true) {
+				cout << currentPlayer << " won!\n";
+				isDone = true;
+			}
+			else if (turn == 9) {
+				cout << "The game is a draw\n";
+				isDone = true;
+			}
+			//Switch players
+			if (currentPlayer == player1) {
+				cout << endl<< player2 << "\'s " << "turn\n";
+				currentPlayer = player2;
+			}
+			else {
+				currentPlayer = player1;
+				cout << endl << player1 << "\'s " << "turn\n";
+			}
+		}
+		
 		
 	}
 }
 
 int TicTacToeGame::getXCoord()
 {
+	bool isInputBad = true;
+
 	int x;
-	cout << "Enter to x-coordiante: ";
-	cin >> x;
+
+	while (isInputBad == true) {
+		cout << "Enter to x-coordiante: ";
+		cin >> x;
+
+		if (x < 1 || x>3) {
+			cout << "Invalid coordinate\n";
+		}
+		else {
+			isInputBad = false;
+		}
+	 }
+	
 	return x-1;
 }
 
 int TicTacToeGame::getYCoord()
 {
+	bool isInputBad = true;
+
 	int y;
-	cout << "Enter to y-coordiante: ";
-	cin >> y;
-	return y-1;
+
+	while (isInputBad == true) {
+		cout << "Enter to y-coordiante: ";
+		cin >> y;
+
+		if (y < 1 || y>3) {
+			cout << "Invalid coordinate\n";
+		}
+		else {
+			isInputBad = false;
+		}
+	}
+
+	return y - 1;
 }
 
 bool TicTacToeGame::placeMarker(int x, int y, char currentPlayer) 
@@ -72,4 +127,24 @@ bool TicTacToeGame::placeMarker(int x, int y, char currentPlayer)
 	}
 	board[y][x] = currentPlayer;
 	return true;
+}
+
+bool TicTacToeGame::checkForVictory()
+{
+	//check rows
+	for (int i = 0; i < 3; i++) {
+		if (board[i][0] == board[i][1] && board[i][1] == board[i][2] && board[i][0] != ' ') {
+			return true;
+		}
+		if (board[0][i] == board[1][i] && board[1][i] == board[2][i] && board[0][i] != ' ') {
+			return true;
+		}
+		if (board[0][0] == board[1][1] && board[1][1] == board[2][2] && board[0][0] != ' ') {
+			return true;
+		}
+		if (board[0][2] == board[1][1] && board[2][0] == board[3][1] && board[0][0] != ' ') {
+			return true;
+		}
+		return false;
+	}
 }
