@@ -65,12 +65,12 @@ void TicTacToeGame::playGame()
 			}
 			//Switch players
 			if (currentPlayer == player1) {
-				cout << endl<< player2 << "\'s " << "turn\n";
+				//cout << endl<< player2 << "\'s " << "turn\n";
 				currentPlayer = player2;
 			}
 			else {
 				currentPlayer = player1;
-				cout << endl << player1 << "\'s " << "turn\n";
+				//cout << endl << player1 << "\'s " << "turn\n";
 			}
 		}
 		
@@ -136,15 +136,25 @@ bool TicTacToeGame::checkForVictory()
 		if (board[i][0] == board[i][1] && board[i][1] == board[i][2] && board[i][0] != ' ') {
 			return true;
 		}
+	}
+
+	//check columns
+	for (int i = 0; i < 3; i++) {
 		if (board[0][i] == board[1][i] && board[1][i] == board[2][i] && board[0][i] != ' ') {
 			return true;
 		}
+	}
+
+	//check diagonals
+	for (int i = 0; i < 3; i++) {
 		if (board[0][0] == board[1][1] && board[1][1] == board[2][2] && board[0][0] != ' ') {
 			return true;
 		}
-		if (board[0][2] == board[1][1] && board[2][0] == board[3][1] && board[0][0] != ' ') {
+	}
+	for (int i = 0; i < 3; i++) {
+		if (board[0][2] == board[1][1] && board[1][1] == board[2][0] && board[0][0] != ' ') {
 			return true;
 		}
-		return false;
 	}
+	return false;
 }
