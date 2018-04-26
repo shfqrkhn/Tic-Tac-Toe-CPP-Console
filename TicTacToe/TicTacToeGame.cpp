@@ -10,7 +10,7 @@ TicTacToeGame::TicTacToeGame()
 
 void TicTacToeGame::clearBoard()
 {
-	for (int y = 0; y < 3; y++)	{
+	for (int y = 0; y < 3; y++) {
 		for (int x = 0; x < 3; x++) {
 			board[y][x] = ' ';
 		}
@@ -24,7 +24,7 @@ void TicTacToeGame::printBoard()
 	cout << " |1|2|3|\n";
 	for (int y = 0; y < 3; y++) {
 		cout << "--------" << endl;
-		cout << y+1 << "|" << board[y][0] << "|" << board[y][1] << "|" << board[y][2] << "|" << endl;
+		cout << y + 1 << "|" << board[y][0] << "|" << board[y][1] << "|" << board[y][2] << "|" << endl;
 	}
 	cout << "-------" << endl;
 }
@@ -44,12 +44,12 @@ void TicTacToeGame::playGame()
 	int turn = 0;
 
 	while (isDone == false) {
-		
+
 		printBoard();
-		
+
 		x = getXCoord();
 		y = getYCoord();
-		
+
 		if (placeMarker(x, y, currentPlayer) == false) {
 			cout << "That spot is occupied\n";
 		}
@@ -73,8 +73,6 @@ void TicTacToeGame::playGame()
 				//cout << endl << player1 << "\'s " << "turn\n";
 			}
 		}
-		
-		
 	}
 }
 
@@ -94,9 +92,9 @@ int TicTacToeGame::getXCoord()
 		else {
 			isInputBad = false;
 		}
-	 }
-	
-	return x-1;
+	}
+
+	return x - 1;
 }
 
 int TicTacToeGame::getYCoord()
@@ -120,7 +118,7 @@ int TicTacToeGame::getYCoord()
 	return y - 1;
 }
 
-bool TicTacToeGame::placeMarker(int x, int y, char currentPlayer) 
+bool TicTacToeGame::placeMarker(int x, int y, char currentPlayer)
 {
 	if (board[y][x] != ' ') {
 		return false;
@@ -133,14 +131,14 @@ bool TicTacToeGame::checkForVictory()
 {
 	//check rows
 	for (int i = 0; i < 3; i++) {
-		if (board[i][0] == board[i][1] && board[i][1] == board[i][2] && board[i][0] != ' ') {
+		if (board[i][0] == board[i][1] && board[i][0] == board[i][2] && board[i][0] != ' ') {
 			return true;
 		}
 	}
 
 	//check columns
 	for (int i = 0; i < 3; i++) {
-		if (board[0][i] == board[1][i] && board[1][i] == board[2][i] && board[0][i] != ' ') {
+		if (board[0][i] == board[1][i] && board[1][0] == board[2][i] && board[0][i] != ' ') {
 			return true;
 		}
 	}
@@ -152,7 +150,7 @@ bool TicTacToeGame::checkForVictory()
 		}
 	}
 	for (int i = 0; i < 3; i++) {
-		if (board[0][2] == board[1][1] && board[1][1] == board[2][0] && board[0][0] != ' ') {
+		if (board[0][2] == board[1][1] && board[1][1] == board[2][0] && board[0][2] != ' ') {
 			return true;
 		}
 	}
